@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import *
 import random
 
@@ -114,11 +115,51 @@ def check_collisions(snake):
         
     return False
 
+#def game_over():
+    #canvas.delete(ALL)
+    #canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2,
+                       #font=('consolas',70), text="GAME OVER", fill="#64d86b", tag="gameover")
+
 def game_over():
 
+    #playerScore = score
+    #print (f"{playerScore}")
+
+    #def printScore():
+        #with open('Highscores.txt', 'a', encoding = 'utf-8') as file:
+            #file.write(f' {playerScore}.\n')
     canvas.delete(ALL)
-    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2,
-                       font=('consolas',70), text="GAME OVER", fill="#64d86b", tag="gameover")
+    canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/4,
+                       font=('consolas',70), text="GAME OVER", fill="#64d86b", tag="gameover")            
+
+    def printScore():
+        playerScore = score
+        print (f"{playerScore}")
+        name = name_entry.get()
+        print (f"{name}")
+        with open('Highscores.txt', 'a', encoding = 'utf-8') as file:
+            file.write(f'{name} {playerScore}.\n')
+        submit_button["state"] = DISABLED
+
+    game_over_screen = tk.Tk()
+    game_over_screen.title("Game Over")
+
+    game_over_label = tk.Label(game_over_screen, text="Game Over!")
+    game_over_label.pack()
+
+    name_label = tk.Label(game_over_screen, text="Enter your name:")
+    name_label.pack()
+
+    name_entry = tk.Entry(game_over_screen)
+    name_entry.pack()
+
+    submit_button = tk.Button(game_over_screen, text="Submit", command=printScore)
+    submit_button.pack()
+        
+    quit_button = tk.Button(game_over_screen, text="Quit", command=game_over_screen.destroy)
+    quit_button.pack()
+
+    game_over_screen.mainloop()
 
 window = Tk()
 window.title("Don't trust the federal agents")
