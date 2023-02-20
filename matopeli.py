@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 import random
-
+import pygame
 
 GAME_WIDTH = 1000
 GAME_HEIGHT = 700
@@ -11,6 +11,11 @@ BODY_PARTS = 3
 SNAKE_COLOR = "#64d86b"
 FOOD_COLOR = "#8b0000"
 BACKGROUND_COLOR = "#000000"
+
+pygame.mixer.init()
+
+music = pygame.mixer.Sound("Sounds\Sewerslvtgoodbye.mp3")
+sound_effect = pygame.mixer.Sound("Sounds\Munch.mp3")
 
 class Snake:
     
@@ -34,6 +39,7 @@ class Food:
         y = random.randint(0, (GAME_HEIGHT / SPACE_SIZE) - 1) * SPACE_SIZE
 
         self.coordinates = [x, y]
+
 
         canvas.create_oval(x, y, x + SPACE_SIZE, y + SPACE_SIZE, fill=FOOD_COLOR, tag="food")
 
@@ -59,6 +65,8 @@ def next_turn(snake, food):
     if x == food.coordinates[0] and y == food.coordinates[1]:
 
         global score
+        
+        sound_effect.play()
         
         score += 1
 
@@ -105,9 +113,7 @@ def check_collisions(snake):
     if x < 0 or x >= GAME_WIDTH:
         return True
     elif y < 0 or y >= GAME_HEIGHT:
-        print("Game Over")
         return True
-
 
     for body_part in snake.coordinates[1:]:
         if x == body_part[0] and y == body_part[1]:
@@ -115,19 +121,10 @@ def check_collisions(snake):
         
     return False
 
-#def game_over():
-    #canvas.delete(ALL)
-    #canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/2,
-                       #font=('consolas',70), text="GAME OVER", fill="#64d86b", tag="gameover")
-
 def game_over():
 
-    #playerScore = score
-    #print (f"{playerScore}")
+    music.set_volume(0)
 
-    #def printScore():
-        #with open('Highscores.txt', 'a', encoding = 'utf-8') as file:
-            #file.write(f' {playerScore}.\n')
     canvas.delete(ALL)
     canvas.create_text(canvas.winfo_width()/2, canvas.winfo_height()/4,
                        font=('consolas',70), text="GAME OVER", fill="#64d86b", tag="gameover")            
@@ -138,7 +135,7 @@ def game_over():
         name = name_entry.get()
         print (f"{name}")
         with open('Highscores.txt', 'a', encoding = 'utf-8') as file:
-            file.write(f'{name} {playerScore}.\n')
+            file.write(f'{name}|{playerScore}\n')
         submit_button["state"] = DISABLED
 
     game_over_screen = tk.Tk()
@@ -175,6 +172,10 @@ canvas = Canvas(window, bg=BACKGROUND_COLOR, height=GAME_HEIGHT, width=GAME_WIDT
 canvas.pack()
 
 window.update()
+
+music.play()
+sound_effect.set_volume(0.05)
+music.set_volume(0.05)
 
 window_width = window.winfo_width()
 window_height = window.winfo_height()
