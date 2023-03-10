@@ -7,3 +7,5 @@ place the "Highscores.txt" file into the "SnakerNumberOne" folder
 inisde the "SnakerNumberOne" folder create a new folder called "Sounds"
 
 Add the "Munch.mp3" file in the "Sounds" folder
+
+or just download the release version ...02
