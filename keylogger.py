@@ -208,18 +208,20 @@ def game_over():
     game_over_screen.geometry("300x180")
     game_over_screen.title("Game Over")
     game_over_screen.configure(background='black')
+    game_over_screen.resizable(False, False)
+
 
     #now there is a label that the game is over
-    game_over_label = tk.Label(game_over_screen, font=("Arial", 14, "bold"), bg="black", fg="#46036A", text="Game Over!")
+    game_over_label = tk.Label(game_over_screen, font=("Arial", 14, "bold"), bg="black", fg="#64d86b", text="Game Over!")
     game_over_label.pack(pady=2)
 
     #Now it's trying to get your name?
-    name_label = tk.Label(game_over_screen, font=("Arial", 14, "bold"), bg="black", fg="#46036A", text="Enter your name:")
+    name_label = tk.Label(game_over_screen, font=("Arial", 14, "bold"), bg="black", fg="#64d86b", text="Enter your name:")
     name_label.pack(pady=2)
 
     #This creates a box you can eneter text into
     #But don't give them your name, they will sell your info to china
-    name_entry = tk.Entry(game_over_screen, bg="#3A3A3A", fg="#46036A", font=("Arial", 14, "bold"))
+    name_entry = tk.Entry(game_over_screen, bg="#3A3A3A", fg="#CCCCCC", font=("Arial", 14, "bold"))
     name_entry.pack(pady=5)
 
     #Creates a button that says "submit" on it
@@ -227,8 +229,14 @@ def game_over():
     submit_button = tk.Button(game_over_screen, fg="#46036A", bg="green", text="Submit", command=printScore)
     submit_button.pack(pady=5)
     
+    #Closes the game over screen and the game
+    def mega():
+        game_over_screen.destroy()
+        canvas.destroy()
+        window.destroy()
+
     #Finally the Quit button that definetly doesn't install a keylogger on your computer if you press it (/s)
-    quit_button = tk.Button(game_over_screen, text="Quit", fg="#46036A", bg="green", command=game_over_screen.destroy)
+    quit_button = tk.Button(game_over_screen, text="Quit", fg="#46036A", bg="green", command=mega)
     quit_button.pack(pady=5)
 
     #Collects information of your screen height and width

