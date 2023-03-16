@@ -1,3 +1,6 @@
+[2023.03.16] Ignore everything below and just download the zip.
+
+
 Idk why would you even try this out
 
 But if you do make a folder in the folder where you have these .py files called "SnakerNumberOne" otherwise it won't work
